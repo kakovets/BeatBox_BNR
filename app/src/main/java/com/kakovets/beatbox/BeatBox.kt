@@ -32,14 +32,15 @@ class BeatBox(private val assets: AssetManager) {
     }
 
     private fun loadSounds(): List<Sound> {
-
         val soundNames: Array<String>
+
         try {
             soundNames = assets.list(SOUNDS_FOLDER)!!
         } catch (e: java.lang.Exception) {
             Log.e(TAG, "Could not list assets", e)
             return emptyList()
         }
+
         val sounds = mutableListOf<Sound>()
         soundNames.forEach { filename ->
             val assetPath = "$SOUNDS_FOLDER/$filename"
@@ -54,10 +55,10 @@ class BeatBox(private val assets: AssetManager) {
         }
         return sounds
     }
+
     private fun load(sound: Sound) {
         val afd = assets.openFd(sound.assetPath)
         val soundID = soundPool.load(afd, 1)
         sound.soundID = soundID
-
     }
 }
